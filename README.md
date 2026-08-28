@@ -44,12 +44,6 @@ This is a **frontend-only, client-side prototype** — no backend or database re
 
 Each signal is converted to a 0–100 sub-score, weighted, summed, and mapped onto a 300–850 scale (familiar "credit score" range). The full formula is in `calculateScore()` inside `script.js`.
 
-### Try it live
-
-1. Open `index.html` in any browser — no install needed
-2. Use the sliders to enter a profile, or click a preset (Ramesh / Lakshmi / Arjun) for an instant demo
-3. Click **Calculate Credit-Readiness Score** to see the score, tier, and explainable breakdown
-4. Click **Export Lender-Ready Report (PDF)** to download a shareable report
 
 ## Planned Architecture (Beyond This Prototype)
 
@@ -62,10 +56,3 @@ Each signal is converted to a 0–100 sub-score, weighted, summed, and mapped on
 | Hosting | Vercel / Render |
 | Future Scope | Real UPI API integration, gig-platform data, live utility bill data |
 
-## Team
-
-- HackInTym'26 2.0 · Dev Dynasty / Advyant / AI Club
-
-## Note
-
-Built and submitted as part of a 30-hour intra-college hackathon. This is a shortlisting-round prototype — data shown is illustrative/self-reported, not connected to live UPI, gig-platform, or utility bill APIs.
