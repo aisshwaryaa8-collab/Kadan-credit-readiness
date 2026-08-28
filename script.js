@@ -386,6 +386,10 @@ document.getElementById("exportBtn").addEventListener("click", () => {
   doc.save("Kadan_Credit_Readiness_Report.pdf");
 });
 
+// ---------- HEADER GITHUB LINK ----------
+// Replace this with your actual repo URL before deploying.
+document.getElementById("githubLink").href = "https://github.com/aisshwaryaa8-collab/kadan-credit-readiness";
+
 // ---------- INIT ----------
 showStep(1);
 if (window.lucide) lucide.createIcons();
