@@ -1,8 +1,5 @@
 # Kadan — Credit-Readiness Score
 
-**A 30-hr Intra-College Hackathon Prototype · HackInTym'26 2.0**
-**Meenakshi Sundararajan Engineering College (Autonomous)**
-
 ## The Problem
 
 Millions of gig workers and street vendors are financially active but excluded from formal credit due to lack of traditional credit history. Banks and NBFCs have no way to assess their reliability, so they're locked out of loans despite having real, provable income patterns.
