@@ -8,10 +8,10 @@ Millions of gig workers and street vendors are financially active but excluded f
 
 **Kadan** replaces paperwork with real reliability signals. Instead of a bank statement or credit bureau file, it looks at what a gig worker or vendor already generates every day:
 
-- 📱 **UPI Transaction Regularity** — how consistently they use digital payments
-- 💼 **Work Tenure** — how long they've been active on a platform or in their trade
-- ⭐ **App / Customer Ratings** — service quality signals from platforms they work on
-- 🧾 **Utility Bill Payment History** — on-time payment behavior for electricity, mobile, rent
+-  *UPI Transaction Regularity* — how consistently they use digital payments
+-  *Work Tenure* — how long they've been active on a platform or in their trade
+-  *App / Customer Ratings* — service quality signals from platforms they work on
+-  *Utility Bill Payment History* — on-time payment behavior for electricity, mobile, rent
 
 These are combined into a single, transparent **Credit-Readiness Score (300–850)** — plus a full point-by-point breakdown showing *exactly* why someone scored the way they did.
 
