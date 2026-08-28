@@ -387,7 +387,6 @@ document.getElementById("exportBtn").addEventListener("click", () => {
 });
 
 // ---------- HEADER GITHUB LINK ----------
-// Replace this with your actual repo URL before deploying.
 document.getElementById("githubLink").href = "https://github.com/aisshwaryaa8-collab/kadan-credit-readiness";
 
 // ---------- INIT ----------
