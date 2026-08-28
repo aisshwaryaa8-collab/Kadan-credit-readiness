@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kadan — Credit-Readiness Score</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<!-- PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Decorative background layer -->
+<div class="bg-decor" aria-hidden="true">
+  <div class="dot-grid"></div>
+  <div class="blob blob-violet"></div>
+  <div class="blob blob-yellow"></div>
+  <div class="shape shape-tri"></div>
+  <div class="shape shape-circle"></div>
+</div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <span class="logo-mark">₹</span>
+      <span class="logo-text">Kadan</span>
+    </div>
+    <span class="pill-badge">HackInTym'26 Prototype</span>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">Alternative Credit Scoring</span>
+      <h1>Your work is real.<br/>Your credit score should <span class="highlight">see it too.</span></h1>
+      <p class="hero-sub">
+        Kadan turns everyday signals — UPI habits, work tenure, ratings, and bill payments —
+        into a transparent Credit-Readiness Score. No paperwork. No black box. Just proof of what you already do.
+      </p>
+      <a href="#calculator" class="btn btn-primary">
+        Try the Score Calculator
+        <span class="btn-icon"><i data-lucide="arrow-right"></i></span>
+      </a>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-card">
+        <div class="hero-card-row"><i data-lucide="smartphone"></i><span>UPI Regularity</span></div>
+        <div class="hero-card-row"><i data-lucide="briefcase"></i><span>Work Tenure</span></div>
+        <div class="hero-card-row"><i data-lucide="star"></i><span>App Ratings</span></div>
+        <div class="hero-card-row"><i data-lucide="receipt"></i><span>Bill Payments</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CALCULATOR ===================== -->
+<section class="calculator" id="calculator">
+  <div class="container">
+
+    <div class="section-heading">
+      <span class="eyebrow">Step 1</span>
+      <h2>Tell us about your work life</h2>
+      <p>Move the sliders to match a real profile — or load a sample below.</p>
+    </div>
+
+    <!-- Preset demo profiles -->
+    <div class="presets">
+      <button class="preset-chip" data-preset="ramesh">Ramesh · Delivery Rider</button>
+      <button class="preset-chip" data-preset="lakshmi">Lakshmi · Street Vendor</button>
+      <button class="preset-chip" data-preset="arjun">Arjun · New Gig Worker</button>
+    </div>
+
+    <div class="sticker-card form-card">
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="regularity">UPI Transaction Regularity</label>
+          <span class="field-value" id="regularityValue">70%</span>
+        </div>
+        <input type="range" id="regularity" min="0" max="100" value="70" step="1" />
+        <p class="field-hint">% of months with 15+ UPI transactions in the last year</p>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="tenure">Work Tenure</label>
+          <span class="field-value" id="tenureValue">14 months</span>
+        </div>
+        <input type="range" id="tenure" min="0" max="60" value="14" step="1" />
+        <p class="field-hint">Months active on gig platform / at current trade</p>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="ratings">Average App / Customer Rating</label>
+          <span class="field-value" id="ratingsValue">4.2 / 5</span>
+        </div>
+        <input type="range" id="ratings" min="0" max="5" value="4.2" step="0.1" />
+        <p class="field-hint">Rider, delivery, or vendor app rating</p>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="bills">Utility Bill Payment History</label>
+          <span class="field-value" id="billsValue">80%</span>
+        </div>
+        <input type="range" id="bills" min="0" max="100" value="80" step="1" />
+        <p class="field-hint">% of electricity / mobile / rent bills paid on time (last 6–12 months)</p>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="calculateBtn">
+        Calculate Credit-Readiness Score
+        <span class="btn-icon"><i data-lucide="sparkles"></i></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RESULTS ===================== -->
+<section class="results" id="results" hidden>
+  <div class="container">
+
+    <div class="section-heading">
+      <span class="eyebrow">Step 2</span>
+      <h2>Your Credit-Readiness Report</h2>
+      <p>Every point is explainable — nothing here is a black box.</p>
+    </div>
+
+    <div class="report-card">
+
+      <div class="report-top">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 220 130" class="gauge-svg" id="gaugeSvg">
+            <path d="M 20 110 A 90 90 0 0 1 200 110" class="gauge-track" />
+            <path d="M 20 110 A 90 90 0 0 1 200 110" class="gauge-fill" id="gaugeFill" />
+          </svg>
+          <div class="gauge-center">
+            <span class="gauge-score" id="scoreValue">0</span>
+            <span class="gauge-max">/ 850</span>
+          </div>
+        </div>
+
+        <div class="tier-block">
+          <span class="tier-badge" id="tierBadge">—</span>
+          <p class="tier-desc" id="tierDesc">Fill the form and calculate your score.</p>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <h3>Score Breakdown</h3>
+        <ul class="breakdown-list" id="breakdownList"></ul>
+      </div>
+
+      <button class="btn btn-secondary btn-block" id="exportBtn">
+        <i data-lucide="download"></i>
+        Export Lender-Ready Report (PDF)
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Kadan — Prototype built for HackInTym'26 2.0 · Meenakshi Sundararajan Engineering College</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
