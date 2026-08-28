@@ -5,28 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kadan — Credit-Readiness Score</title>
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-<!-- Icons -->
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
-<!-- PDF export -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- Decorative background layer -->
 <div class="bg-decor" aria-hidden="true">
   <div class="dot-grid"></div>
   <div class="blob blob-violet"></div>
   <div class="blob blob-yellow"></div>
-  <div class="shape shape-tri"></div>
-  <div class="shape shape-circle"></div>
 </div>
 
 <!-- ===================== HEADER ===================== -->
@@ -50,8 +43,8 @@
         Kadan turns everyday signals — UPI habits, work tenure, ratings, and bill payments —
         into a transparent Credit-Readiness Score. No paperwork. No black box. Just proof of what you already do.
       </p>
-      <a href="#calculator" class="btn btn-primary">
-        Try the Score Calculator
+      <a href="#app" class="btn btn-primary">
+        Start Your Application
         <span class="btn-icon"><i data-lucide="arrow-right"></i></span>
       </a>
     </div>
@@ -66,75 +59,156 @@
   </div>
 </section>
 
-<!-- ===================== CALCULATOR ===================== -->
-<section class="calculator" id="calculator">
+<!-- ===================== APPLICATION ===================== -->
+<section class="app-section" id="app">
   <div class="container">
 
     <div class="section-heading">
-      <span class="eyebrow">Step 1</span>
-      <h2>Tell us about your work life</h2>
-      <p>Move the sliders to match a real profile — or load a sample below.</p>
+      <span class="eyebrow">Application</span>
+      <h2>Build your Credit-Readiness profile</h2>
+      <p>Four short questions. Nothing here is stored or shared until you choose to export it.</p>
     </div>
 
-    <!-- Preset demo profiles -->
-    <div class="presets">
-      <button class="preset-chip" data-preset="ramesh">Ramesh · Delivery Rider</button>
-      <button class="preset-chip" data-preset="lakshmi">Lakshmi · Street Vendor</button>
-      <button class="preset-chip" data-preset="arjun">Arjun · New Gig Worker</button>
+    <div class="demo-loader">
+      <label for="demoSelect">Demo mode — load a sample applicant</label>
+      <select id="demoSelect">
+        <option value="">— Select a sample —</option>
+        <option value="ramesh">Ramesh · Delivery Rider</option>
+        <option value="lakshmi">Lakshmi · Street Vendor</option>
+        <option value="arjun">Arjun · New Gig Worker</option>
+      </select>
     </div>
 
-    <div class="sticker-card form-card">
+    <div class="app-shell" id="appShell">
 
-      <div class="field">
-        <div class="field-label-row">
-          <label for="regularity">UPI Transaction Regularity</label>
-          <span class="field-value" id="regularityValue">70%</span>
+      <!-- Stepper -->
+      <ol class="stepper" id="stepper">
+        <li class="step-dot active" data-step="1"><span class="dot-num">1</span><span class="dot-label">Payment Activity</span></li>
+        <li class="step-dot" data-step="2"><span class="dot-num">2</span><span class="dot-label">Work History</span></li>
+        <li class="step-dot" data-step="3"><span class="dot-num">3</span><span class="dot-label">Service Quality</span></li>
+        <li class="step-dot" data-step="4"><span class="dot-num">4</span><span class="dot-label">Bill Payments</span></li>
+        <li class="step-dot" data-step="5"><span class="dot-num">5</span><span class="dot-label">Review</span></li>
+      </ol>
+
+      <!-- Step 1: UPI Regularity -->
+      <div class="step-panel active" data-panel="1">
+        <h3>How regularly do you use UPI for transactions?</h3>
+        <p class="step-hint">Based on the last 12 months of activity.</p>
+        <div class="option-grid" data-field="regularity">
+          <label class="option-card">
+            <input type="radio" name="regularity" value="20" />
+            <span class="option-title">Rarely</span>
+            <span class="option-sub">15+ transactions in 0–3 months</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="regularity" value="50" />
+            <span class="option-title">Sometimes</span>
+            <span class="option-sub">15+ transactions in 4–7 months</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="regularity" value="75" />
+            <span class="option-title">Often</span>
+            <span class="option-sub">15+ transactions in 8–10 months</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="regularity" value="92" />
+            <span class="option-title">Almost always</span>
+            <span class="option-sub">15+ transactions in 11–12 months</span>
+          </label>
         </div>
-        <input type="range" id="regularity" min="0" max="100" value="70" step="1" />
-        <p class="field-hint">% of months with 15+ UPI transactions in the last year</p>
       </div>
 
-      <div class="field">
-        <div class="field-label-row">
-          <label for="tenure">Work Tenure</label>
-          <span class="field-value" id="tenureValue">14 months</span>
+      <!-- Step 2: Work Tenure -->
+      <div class="step-panel" data-panel="2">
+        <h3>How long have you been in this work?</h3>
+        <p class="step-hint">Time on your current gig platform, stall, or trade.</p>
+        <div class="number-field">
+          <input type="number" id="tenureInput" min="0" max="480" value="" placeholder="e.g. 14" />
+          <span class="number-unit">months</span>
         </div>
-        <input type="range" id="tenure" min="0" max="60" value="14" step="1" />
-        <p class="field-hint">Months active on gig platform / at current trade</p>
+        <div class="quick-chips">
+          <button type="button" class="chip" data-value="6">6 mo</button>
+          <button type="button" class="chip" data-value="12">1 yr</button>
+          <button type="button" class="chip" data-value="24">2 yrs</button>
+          <button type="button" class="chip" data-value="36">3 yrs</button>
+          <button type="button" class="chip" data-value="60">5 yrs</button>
+        </div>
       </div>
 
-      <div class="field">
-        <div class="field-label-row">
-          <label for="ratings">Average App / Customer Rating</label>
-          <span class="field-value" id="ratingsValue">4.2 / 5</span>
+      <!-- Step 3: Ratings -->
+      <div class="step-panel" data-panel="3">
+        <h3>What's your average customer / app rating?</h3>
+        <p class="step-hint">Tap a star for a whole number, or fine-tune with the exact value.</p>
+        <div class="star-rating" id="starRating">
+          <button type="button" class="star" data-star="1" aria-label="1 star"><i data-lucide="star"></i></button>
+          <button type="button" class="star" data-star="2" aria-label="2 stars"><i data-lucide="star"></i></button>
+          <button type="button" class="star" data-star="3" aria-label="3 stars"><i data-lucide="star"></i></button>
+          <button type="button" class="star" data-star="4" aria-label="4 stars"><i data-lucide="star"></i></button>
+          <button type="button" class="star" data-star="5" aria-label="5 stars"><i data-lucide="star"></i></button>
         </div>
-        <input type="range" id="ratings" min="0" max="5" value="4.2" step="0.1" />
-        <p class="field-hint">Rider, delivery, or vendor app rating</p>
+        <div class="number-field number-field-inline">
+          <input type="number" id="ratingsInput" min="0" max="5" step="0.1" value="" placeholder="e.g. 4.2" />
+          <span class="number-unit">/ 5</span>
+        </div>
       </div>
 
-      <div class="field">
-        <div class="field-label-row">
-          <label for="bills">Utility Bill Payment History</label>
-          <span class="field-value" id="billsValue">80%</span>
+      <!-- Step 4: Bills -->
+      <div class="step-panel" data-panel="4">
+        <h3>How consistently do you pay utility bills on time?</h3>
+        <p class="step-hint">Electricity, mobile recharge, or rent — over the last 6–12 months.</p>
+        <div class="option-grid" data-field="bills">
+          <label class="option-card">
+            <input type="radio" name="bills" value="97" />
+            <span class="option-title">Always on time</span>
+            <span class="option-sub">95–100% on-time payments</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="bills" value="85" />
+            <span class="option-title">Mostly on time</span>
+            <span class="option-sub">75–94% on-time payments</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="bills" value="62" />
+            <span class="option-title">Sometimes late</span>
+            <span class="option-sub">50–74% on-time payments</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="bills" value="35" />
+            <span class="option-title">Often late / missed</span>
+            <span class="option-sub">Below 50% on-time payments</span>
+          </label>
         </div>
-        <input type="range" id="bills" min="0" max="100" value="80" step="1" />
-        <p class="field-hint">% of electricity / mobile / rent bills paid on time (last 6–12 months)</p>
       </div>
 
-      <button class="btn btn-primary btn-block" id="calculateBtn">
-        Calculate Credit-Readiness Score
-        <span class="btn-icon"><i data-lucide="sparkles"></i></span>
-      </button>
+      <!-- Step 5: Review -->
+      <div class="step-panel" data-panel="5">
+        <h3>Review your application</h3>
+        <p class="step-hint">Check your answers before generating your report.</p>
+        <ul class="review-list" id="reviewList"></ul>
+      </div>
+
+      <!-- Nav -->
+      <div class="step-nav">
+        <button type="button" class="btn btn-secondary" id="backBtn" hidden>Back</button>
+        <button type="button" class="btn btn-primary" id="nextBtn" disabled>
+          Next
+          <span class="btn-icon"><i data-lucide="arrow-right"></i></span>
+        </button>
+        <button type="button" class="btn btn-primary" id="generateBtn" hidden>
+          Generate Credit-Readiness Report
+          <span class="btn-icon"><i data-lucide="sparkles"></i></span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== RESULTS ===================== -->
+<!-- ===================== REPORT ===================== -->
 <section class="results" id="results" hidden>
   <div class="container">
 
     <div class="section-heading">
-      <span class="eyebrow">Step 2</span>
+      <span class="eyebrow">Report</span>
       <h2>Your Credit-Readiness Report</h2>
       <p>Every point is explainable — nothing here is a black box.</p>
     </div>
@@ -155,7 +229,7 @@
 
         <div class="tier-block">
           <span class="tier-badge" id="tierBadge">—</span>
-          <p class="tier-desc" id="tierDesc">Fill the form and calculate your score.</p>
+          <p class="tier-desc" id="tierDesc"></p>
         </div>
       </div>
 
@@ -164,10 +238,16 @@
         <ul class="breakdown-list" id="breakdownList"></ul>
       </div>
 
-      <button class="btn btn-secondary btn-block" id="exportBtn">
-        <i data-lucide="download"></i>
-        Export Lender-Ready Report (PDF)
-      </button>
+      <div class="report-actions">
+        <button class="btn btn-secondary" id="restartBtn">
+          <i data-lucide="rotate-ccw"></i>
+          Start New Application
+        </button>
+        <button class="btn btn-primary" id="exportBtn">
+          <i data-lucide="download"></i>
+          Export Lender-Ready Report (PDF)
+        </button>
+      </div>
     </div>
   </div>
 </section>
