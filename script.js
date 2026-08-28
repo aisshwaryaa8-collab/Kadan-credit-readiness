@@ -80,15 +80,22 @@ nextBtn.addEventListener("click", () => {
 });
 
 // ---------- STEP 1 & 4: OPTION CARDS ----------
+function refreshOptionSelection(name) {
+  document.querySelectorAll(`input[name="${name}"]`).forEach((input) => {
+    input.closest(".option-card").classList.toggle("selected", input.checked);
+  });
+}
 document.querySelectorAll('input[name="regularity"]').forEach((input) => {
   input.addEventListener("change", () => {
     appData.regularity = Number(input.value);
+    refreshOptionSelection("regularity");
     validateCurrentStep();
   });
 });
 document.querySelectorAll('input[name="bills"]').forEach((input) => {
   input.addEventListener("change", () => {
     appData.bills = Number(input.value);
+    refreshOptionSelection("bills");
     validateCurrentStep();
   });
 });
@@ -285,6 +292,7 @@ generateBtn.addEventListener("click", () => {
 document.getElementById("restartBtn").addEventListener("click", () => {
   Object.keys(appData).forEach((k) => (appData[k] = null));
   document.querySelectorAll('input[type="radio"]').forEach((r) => (r.checked = false));
+  document.querySelectorAll(".option-card.selected").forEach((c) => c.classList.remove("selected"));
   tenureInput.value = "";
   ratingsInput.value = "";
   setStars(0);
@@ -311,6 +319,8 @@ demoSelect.addEventListener("change", () => {
   if (regRadio) regRadio.checked = true;
   const billRadio = document.querySelector(`input[name="bills"][value="${preset.bills}"]`);
   if (billRadio) billRadio.checked = true;
+  refreshOptionSelection("regularity");
+  refreshOptionSelection("bills");
   tenureInput.value = preset.tenure;
   ratingsInput.value = preset.ratings.toFixed(1);
   setStars(preset.ratings);
